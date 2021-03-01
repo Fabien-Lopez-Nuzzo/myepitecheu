@@ -127,8 +127,22 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
     }
 });
 
+const add_colormode_button = () => {
+    var button = document.createElement("BUTTON");
+    button.innerHTML = "for les capés des ieux miskine";
+    
+    // 2. Append somewhere
+    document.body.getElementsByTagName('header')[0].getElementsByTagName("div")[0].appendChild(button);
+
+    // 3. Add event handler
+    button.addEventListener ("click", function() {
+      alert("did something");
+    });
+};
+
 const launchScript = () => {
     if (window.location.href.includes('#')) patchMyEpitech();
+    add_colormode_button();
 };
 
 window.onload = launchScript();
