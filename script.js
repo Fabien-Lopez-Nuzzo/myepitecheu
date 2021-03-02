@@ -136,23 +136,18 @@ const add_colormode_button = () => {
 
     var array = ["Color Mode", "Normal","Deutéranope","Protanope","Tritanope"];
 
-    //Create array of options to be added
-    //Create and append select list
-    //Create and append the options
-
-    // 2. Append somewhere
     document.body.getElementsByTagName('header')[0].getElementsByTagName("div")[0].appendChild(selectList);
     for (var i = 0; i < array.length; i++) {
         var option = document.createElement("option");
         option.value = i;
         option.text = array[i];
+        option.id = 'cell-opt';
         selectList.appendChild(option);
         if (i == 0)
             option.hidden = true;
     }
     selectList.value = 0;
-    // 3. Add event handler
-    // dive.insertBefore(button, dive.children[5]);
+
     selectList.onchange = (el) => {
         activeColorMode = selectList.value;
         localStorage.setItem('activeColorMode', activeColorMode);
