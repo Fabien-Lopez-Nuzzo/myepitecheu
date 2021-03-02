@@ -128,20 +128,39 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 });
 
 const add_colormode_button = () => {
-    var button = document.createElement("BUTTON");
-    button.innerHTML = "for les capés des ieux miskine";
+    var selectList = document.createElement("select");
+    selectList.id = "mySelect";
+    var array = ["Normal","Deutéranope","Protanope","Tritanope"];
+
+    //Create array of options to be added
+
+    //Create and append select list
+    
+    //Create and append the options
     
     // 2. Append somewhere
-    document.body.getElementsByTagName('header')[0].getElementsByTagName("div")[0].appendChild(button);
+    document.body.getElementsByTagName('header')[0].getElementsByTagName("div")[0].appendChild(selectList);
+    for (var i = 0; i < array.length; i++) {
+        var option = document.createElement("option");
+        option.value = array[i];
+        option.text = array[i];
+        selectList.appendChild(option);
+    }
     // 3. Add event handler
-    button.addEventListener ("click", function() {
-      alert("did something");
+    // dive.insertBefore(button, dive.children[5]);
+    selectList.addEventListener ("click", function() {
+        if(document.body.getElementById("mySelect").value == "Normal")
+            alert("gg");
+        else
+            alert("ntm");
     });
 };
 
 const launchScript = () => {
-    if (window.location.href.includes('#')) patchMyEpitech();
-    add_colormode_button();
+    if (window.location.href.includes('#')) {
+        patchMyEpitech();
+        add_colormode_button();
+    }
 };
 
 window.onload = launchScript();
