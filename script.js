@@ -128,11 +128,13 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 });
 
 const add_colormode_button = () => {
-    var button = document.createElement("BUTTON");
+    console.log("test");
+    var button = document.createElement("select");
     button.innerHTML = "for les capés des ieux miskine";
     
     // 2. Append somewhere
-    document.body.getElementsByTagName('header')[0].getElementsByTagName("div")[0].appendChild(button);
+    let div = document.body.getElementsByTagName('header')[0].getElementsByTagName("div")[0];
+    div.appendChild(button);
     // 3. Add event handler
     button.addEventListener ("click", function() {
       alert("did something");
