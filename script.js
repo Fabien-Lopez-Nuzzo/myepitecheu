@@ -1,6 +1,7 @@
 let isActive = false;
 let addedElements = [];
 let hiddenYear = null;
+let activeColorMode = localStorage.getItem('activeColorMode');
 
 const removeUselessButton = (length) => {
     var detailsButton = document.getElementsByClassName('mdl-button__ripple-container');
@@ -129,36 +130,82 @@ chrome.runtime.onMessage.addListener(async (request, sender, sendResponse) => {
 
 const add_colormode_button = () => {
     var selectList = document.createElement("select");
-    selectList.id = "mySelect";
-    var array = ["Normal","Deutéranope","Protanope","Tritanope"];
+    
+    selectList.title = 'Color Mode';
+    selectList.id = 'mySelect';
+
+    var array = ["Color Mode", "Normal","Deutéranope","Protanope","Tritanope"];
 
     //Create array of options to be added
-
     //Create and append select list
-    
     //Create and append the options
-    
+
     // 2. Append somewhere
     document.body.getElementsByTagName('header')[0].getElementsByTagName("div")[0].appendChild(selectList);
     for (var i = 0; i < array.length; i++) {
         var option = document.createElement("option");
-        option.value = array[i];
+        option.value = i;
         option.text = array[i];
         selectList.appendChild(option);
+        if (i == 0)
+            option.hidden = true;
     }
+    selectList.value = 0;
     // 3. Add event handler
     // dive.insertBefore(button, dive.children[5]);
-    selectList.addEventListener ("click", function() {
-        if(document.body.getElementById("mySelect").value == "Normal")
-            alert("gg");
-        else
-            alert("ntm");
-    });
+    selectList.onchange = (el) => {
+        activeColorMode = selectList.value;
+        localStorage.setItem('activeColorMode', activeColorMode);
+        set_colorMode(activeColorMode);
+        selectList.value = 0;
+    };
 };
+
+const set_colorMode = (color) => {
+    var r = document.querySelector(':root');
+
+    if(color == 1) {
+        r.style.setProperty('--color_good', '#33c939');
+        r.style.setProperty('--color_good_fade', '#d3f6d5');
+        r.style.setProperty('--color_mid', '#fea403');
+        r.style.setProperty('--color_mid_fade', '#ffeccd');
+        r.style.setProperty('--color_bad', '#ff0000');
+        r.style.setProperty('--color_bad_fade', '#ffcccc');
+    } if(color == 2) {
+        r.style.setProperty('--color_good', '#e6ac2f');
+        r.style.setProperty('--color_good_fade', '#f1eeee');
+        r.style.setProperty('--color_mid', '#ffe700');
+        r.style.setProperty('--color_mid_fade', '#f1eeee');
+        r.style.setProperty('--color_bad', '#9f8500');
+        r.style.setProperty('--color_bad_fade', '#f1eeee');
+    } if(color == 3) {
+        r.style.setProperty('--color_good', '#ab9b70');
+        r.style.setProperty('--color_good_fade', '#f1eeee');
+        r.style.setProperty('--color_mid', '#ffe900');
+        r.style.setProperty('--color_mid_fade', '#f1eeee');
+        r.style.setProperty('--color_bad', '#826c05');
+        r.style.setProperty('--color_bad_fade', '#f1eeee');
+    } if(color == 4) {
+        r.style.setProperty('--color_good', '#0ba0cb');
+        r.style.setProperty('--color_good_fade', '#f1eeee');
+        r.style.setProperty('--color_mid', '#ffdde3');
+        r.style.setProperty('--color_mid_fade', '#f1eeee');
+        r.style.setProperty('--color_bad', '#d1b1b6');
+        r.style.setProperty('--color_bad_fade', '#f1eeee');
+    }
+}
+
+const init_colorMode = () => {
+    if (!activeColorMode) {
+        activeColorMode = 1;
+    }
+    set_colorMode(activeColorMode);
+}
 
 const launchScript = () => {
     if (window.location.href.includes('#')) {
         patchMyEpitech();
+        init_colorMode();
         add_colormode_button();
     }
 };
