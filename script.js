@@ -133,7 +133,6 @@ const add_colormode_button = () => {
     
     // 2. Append somewhere
     document.body.getElementsByTagName('header')[0].getElementsByTagName("div")[0].appendChild(button);
-
     // 3. Add event handler
     button.addEventListener ("click", function() {
       alert("did something");

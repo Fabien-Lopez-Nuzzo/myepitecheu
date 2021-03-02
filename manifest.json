@@ -8,7 +8,7 @@
     "scripts":["background.js"]
   },
   "content_scripts": [{
-    "css": ["style.scss"],
+    "css": ["style.css"],
     "js": ["script.js"],
     "matches": ["https://my.epitech.eu/*"]
   }],
