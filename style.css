@@ -1,3 +1,12 @@
+:root {
+    --color_good: #33c939;
+    --color_good_fade: #d3f6d5;
+    --color_mid: #fea403;
+    --color_mid_fade: #ffeccd;
+    --color_bad: #ff0000;
+    --color_bad_fade: #ffcccc;
+}
+
 .center-circle {
     margin: auto !important;
 }
@@ -75,12 +84,6 @@
     margin: 1rem;
     border-radius: 50%;
     background-color: #d3f6d5;
-    --color_good: #33c939;
-    --color_good_fade: #d3f6d5;
-    --color_mid: #fea403;
-    --color_mid_fade: #ffeccd;
-    --color_bad: #ff0000;
-    --color_bad_fade: #ffcccc;
 }
 .progress--circle:before {
     content: '';
